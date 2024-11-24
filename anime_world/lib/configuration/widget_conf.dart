@@ -37,3 +37,21 @@ Text animeDescription(String descr){
     ),
   );
 }
+
+
+
+///App Level Title
+///When change this return widget then autometicalluy whole text title changes
+RichText richTitle(List<String> str,List<TextStyle> style){
+
+  return RichText(
+    text: TextSpan(
+      children: List.generate(str.length, (index){
+        return TextSpan(
+          text: str[index],
+          style: style[index],
+        );
+      })
+    ),
+  );
+}
