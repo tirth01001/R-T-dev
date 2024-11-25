@@ -1,4 +1,4 @@
 
 git add .
-git commit -m "Commit From .git File"
+git commit -m "Commit From T"
 git push -u origin main
