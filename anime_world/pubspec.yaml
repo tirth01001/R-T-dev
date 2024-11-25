@@ -38,6 +38,9 @@ dependencies:
 
   flutter_svg: ^2.0.15
 
+  # App Writer Is Database Like Firebase
+  appwrite: ^13.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -64,6 +67,7 @@ flutter:
   assets:
     - assets/test/image/
     - assets/test/svg/
+    - assets/res/svg/bottom_nav/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

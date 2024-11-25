@@ -2,6 +2,7 @@
 
 
 import 'package:anime_world/configuration/widget_conf.dart';
+import 'package:anime_world/main.dart';
 import 'package:flutter/material.dart';
 
 class ComponentDesign {
@@ -95,7 +96,7 @@ class ComponentDesign {
                 child: Image.asset(image,fit: BoxFit.cover,),
               ),
             ),
-            Text(title,style: TextStyle(
+            Text(title,style: const TextStyle(
               color: Colors.white,
               fontSize: 13
             ),)
@@ -104,6 +105,74 @@ class ComponentDesign {
       ),
     );
   }
-  
+
+
+  static Widget episodeViewContainer({
+    String epName = "Naruto",
+    int epNumber = 1,
+    String epImage = "assets/test/image/naruto.jpg",
+    String epDescription = "This is a description of the episode.",
+    String epTime = "28:45",
+    EdgeInsets ? margin,
+    void Function() ? onTap,
+  }){
+
+    return Container(
+      margin: margin,
+      width: maxWidthdp,
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: onTap,
+            child: Expanded(
+              child: SizedBox(
+                height: 100,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  child: Image.asset(epImage,fit: BoxFit.cover,),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 10,),
+          IntrinsicHeight(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Episode No. $epNumber",style: const TextStyle(
+                  fontSize: 17,
+                  color: Colors.white
+                ),),
+                const SizedBox(height: 10,),
+                Text(epName,style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey.withOpacity(.4),
+                ),),
+                const SizedBox(height: 10,),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(.2),
+                    borderRadius: const BorderRadius.all(Radius.circular(8))
+                  ),
+                  padding: const EdgeInsets.only(
+                    left: 5,
+                    right: 5,
+                    bottom: 3,
+                    top: 3
+                  ),
+                  child: Text(epTime,style: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.white
+                  ),),
+                ),
+              ],
+            ),
+          ),
+          Expanded(child: Container()),
+          IconButton(onPressed: (){}, icon: Icon(Icons.download,color: lightGreen,))
+        ],
+      ),
+    );
+  }  
 
 }

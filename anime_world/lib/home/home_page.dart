@@ -3,7 +3,13 @@
 
 import 'package:anime_world/configuration/widget_conf.dart';
 import 'package:anime_world/design/component_design.dart';
+import 'package:anime_world/home/download_anime.dart';
+import 'package:anime_world/home/favorite_anime.dart';
+import 'package:anime_world/home/profile_page.dart';
+import 'package:anime_world/home/search_anime.dart';
 import 'package:anime_world/model/global_model.dart';
+import 'package:anime_world/view/anime_view_page.dart';
+import 'package:anime_world/widget/bottom_navi.dart';
 import 'package:anime_world/widget/page_switcher.dart';
 import 'package:flutter/material.dart';
 
@@ -22,11 +28,13 @@ class _HomePageState extends State<HomePage> {
 
   }
 
+  int bottomActiveIndex = 2;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: bottomActiveIndex == 2 ? AppBar(
         title:  RichText(
           text: TextSpan(
             children: [
@@ -50,8 +58,8 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(onPressed: handleMenu, icon: const Icon(Icons.more_vert_outlined,color: Colors.white,))
         ],
-      ),
-      body: SingleChildScrollView(
+      ) : null, 
+      body: bottomActiveIndex == 2 ? SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -81,7 +89,19 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(left: 10,right: 10,top: 40),
                 child: Row(
                   children: List.generate(10, (index){
-                    return ComponentDesign.animeViewContainer();
+                    return ComponentDesign.animeViewContainer(
+                      heroTag: "animePage$index",
+                      useHeroWidget: true,
+                      onTapAnime: (){
+
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => AnimeViewPage(
+                          imageAddress: "assets/test/image/naruto.jpg",
+                          useHeroAnime: true,
+                          heroTag: "animePage$index",
+                        )));
+                        
+                      }
+                    );
                   }),
                 ),
               ),
@@ -126,6 +146,33 @@ class _HomePageState extends State<HomePage> {
         
           ],
         ),
+      ) : bottomActiveIndex == 1 ? const SearchAnime() : bottomActiveIndex == 3 ? const FavoriteAnime() : bottomActiveIndex == 0 ? const DownloadAnime() : const ProfilePage(),
+      bottomNavigationBar: BottomNavigation(
+        onTapDownload: (){
+          setState(() {
+            bottomActiveIndex = 0;
+          });
+        },
+        onTapFavorite: (){
+          setState(() {
+            bottomActiveIndex = 3;
+          });
+        },
+        onTapHome: (){
+          setState(() {
+            bottomActiveIndex = 2;
+          });
+        },
+        onTapProfile: (){
+          setState(() {
+            bottomActiveIndex = 4;
+          });
+        },
+        onTapSearch: (){
+          setState(() {
+            bottomActiveIndex = 1;
+          });
+        },
       ),
     );
   }

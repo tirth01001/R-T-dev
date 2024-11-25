@@ -1,8 +1,13 @@
+import 'package:anime_world/database/cloude_db.dart';
 import 'package:anime_world/home/home_page.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
+
+  dbInit();
+
 }
 
 double maxWidthdp = 0;
